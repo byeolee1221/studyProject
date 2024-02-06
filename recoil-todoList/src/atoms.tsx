@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 // 모든 컴포넌트에서 안전하게 사용할 수 있도록 해주는 선언
 export enum Categories {
@@ -18,9 +19,15 @@ export const categoryState = atom<Categories>({
   default: Categories.TO_DO
 });
 
+const { persistAtom } = recoilPersist({
+  key: "toDoStorage",
+  storage: localStorage
+});
+
 export const toDoState = atom<IToDo[]>({
   key: "toDo",
   default: [],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const toDoSelector = selector({
