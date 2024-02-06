@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', 'Source Sans 3', Roboto, sans-serif;
     background-color: ${props => props.theme.bgColor};
-    color: ${props => props.theme.textColor};
+    color: black;
   }
   a {
     text-decoration: none;
@@ -71,12 +71,10 @@ const GlobalStyle = createGlobalStyle`
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
         <App />
       </ThemeProvider>
     </RecoilRoot>
-  </React.StrictMode>,
 )
