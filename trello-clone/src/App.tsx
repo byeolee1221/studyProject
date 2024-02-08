@@ -3,9 +3,12 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./components/Board";
+import Trash from "./components/Trash";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 50px;
   max-width: 680px;
   width: 100%;
   margin: 0 auto;
@@ -24,7 +27,7 @@ const Boards = styled.div`
 const App = () => {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const onDragEnd = (info: DropResult) => {
-    const { destination, source, draggableId } = info;
+    const { destination, source } = info;
     if (!destination) {
       return;
     };
@@ -56,14 +59,15 @@ const App = () => {
         }
       })
     }
+  };
 
-  }
   return (
       <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
         <Boards>
           {Object.keys(toDos).map((boardId) => <Board key={boardId} toDos={toDos[boardId]} boardId={boardId} />)}
         </Boards>
+        <Trash />
         </Wrapper>
       </DragDropContext>
   )

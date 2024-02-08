@@ -1,0 +1,6 @@
+# next.js
+/.next/
+/node_modules
+
+#typescript
+next-env.d.ts
