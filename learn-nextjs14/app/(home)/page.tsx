@@ -1,13 +1,29 @@
+import styles from "../../styles/home.module.css";
+import Movie from "../../components/movie";
+
 export const metadata = {
-  title: 'Home',
+  title: "Home"
 };
 
-const Page = () => {
+export const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+
+const getMovies = async () => {
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  const response = await fetch(API_URL);
+  const json = response.json();
+  return json;
+};
+
+const HomePage = async () => {
+  const movies = await getMovies();
+
   return (
-    <div>
-      home
+    <div className={styles.container}>
+        {movies.map((movie) => (
+          <Movie key={movie.id} id={movie.id} poster_path={movie.poster_path} title={movie.title} />
+        ))}
     </div>
   )
 }
 
-export default Page;
+export default HomePage;
